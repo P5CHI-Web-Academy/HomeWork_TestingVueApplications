@@ -37,7 +37,7 @@ describe('SpiceItem.vue', () => {
     expect(wrapper.text()).toContain(order)
   })
 
-  test('should emit on-add-item on clicking the add button', () => {
+  test('emit on-add-item on clicking the add button', () => {
     const wrapper = mount(SpiceItem, {
       propsData: {
         spice: {
@@ -50,5 +50,18 @@ describe('SpiceItem.vue', () => {
     wrapper.find('button:last-of-type').trigger('click')
 
     expect(wrapper.emitted('add-spice')).toHaveLength(1)
+  })
+
+  test('emit on-show-full-info on clicking details button', () => {
+    const wrapper = mount(SpiceItem, {
+      propsData: {
+        spice: {
+          title: 'some title'
+        }
+      }
+    })
+    wrapper.find('button:first-of-type').trigger('click')
+
+    expect(wrapper.emitted('show-full-info')).toHaveLength(1)
   })
 })
