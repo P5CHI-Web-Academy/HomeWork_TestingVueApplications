@@ -13,7 +13,18 @@ describe('Spices.vue', () => {
   let actions
   beforeEach(() => {
     getters = {
-      getAvailableSpices: () => [{}, {}, {}]
+      getAvailableSpices: () => [
+        {
+          title: 'some test title',
+          orderId: 1
+        }, {
+          title: 'some test title',
+          orderId: 2
+        }, {
+          title: 'some test title',
+          orderId: 3
+        }
+      ]
     }
 
     actions = {
