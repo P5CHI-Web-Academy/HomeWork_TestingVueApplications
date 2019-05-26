@@ -9,9 +9,12 @@ describe('Spices.vue', () => {
   })
 
   test('render the number of available spices', () => {
-    const availableSpices = [{}, {}, {}]
+    const spices = [{}, {}, {}]
     const wrapper = shallowMount(Spices)
+    wrapper.setData({
+      spices
+    })
 
-    expect(wrapper.text()).toContain(availableSpices.length)
+    expect(wrapper.text()).toContain(spices.length)
   })
 })
