@@ -50,37 +50,42 @@ describe('Spices.vue', () => {
     expect(wrapper.text()).toContain(spices.length)
   })
 
-  test('render the list of items', () => {
+  test('render the list of items', async () => {
+    const spices = [{}, {}, {}]
     const amount = spices.length
 
-    const wrapper = shallowMount(Spices)
-    wrapper.setData({
-      spices
-    })
+    store.dispatch = jest.fn(() => Promise.resolve())
 
+    const wrapper = shallowMount(Spices, { store, localVue })
+
+    await flushPromises()
+    expect(store.dispatch).toHaveBeenCalledWith('fetchSpices')
     const spiceItems = wrapper.findAll(SpiceItem)
 
     expect(wrapper.vm.spicesCount).toBe(amount)
     expect(spiceItems).toHaveLength(amount)
   })
 
-  test('send a valid props for each of rendered items', () => {
-    expect.assertions(spices.length)
+  test('send a valid props for each of rendered items', async () => {
+    const wrapper = shallowMount(Spices, { store, localVue })
 
-    const wrapper = shallowMount(Spices)
-    wrapper.setData({
-      spices
-    })
-
+    await flushPromises()
     const spiceItems = wrapper.findAll(SpiceItem)
+    const data = wrapper.vm.$data.spices
+
     spiceItems.wrappers.forEach((wrapper, index) => {
-      expect(wrapper.props().spice).toEqual(spices[index])
+      expect(wrapper.props().spice).toEqual(data[index])
     })
   })
 
-  test('receive event from child component on change of the available spices', () => {
-    const wrapper = shallowMount(Spices)
+  test('receive event from child component on change of the available spices', async () => {
+    const wrapper = shallowMount(Spices, {
+      localVue,
+      store
+    })
     const title = 'some spice title'
+
+    await flushPromises()
 
     wrapper.find(SpiceItem).vm.$emit('add-spice', title)
     expect(wrapper.vm.$data.inPreOrder).toContain(title)
