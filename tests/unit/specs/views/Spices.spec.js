@@ -7,4 +7,11 @@ describe('Spices.vue', () => {
 
     expect(wrapper.text()).toContain('Today in trend')
   })
+
+  test('render the number of available spices', () => {
+    const availableSpices = [{}, {}, {}]
+    const wrapper = shallowMount(Spices)
+
+    expect(wrapper.text()).toContain(availableSpices.length)
+  })
 })
