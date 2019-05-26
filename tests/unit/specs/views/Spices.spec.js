@@ -31,6 +31,6 @@ describe('Spices.vue', () => {
     const spiceItems = wrapper.findAll(SpiceItem)
 
     expect(wrapper.vm.spicesCount).toBe(amount)
-    expect(spiceItems.length).toHaveLength(amount)
+    expect(spiceItems).toHaveLength(amount)
   })
 })
