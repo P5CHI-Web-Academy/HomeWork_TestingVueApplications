@@ -1,9 +1,10 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue, mount } from '@vue/test-utils'
 import Spices from '@/views/Spices'
 import SpiceItem from '@/components/SpiceItem'
 import Vuex from 'vuex'
 import flushPromises from 'flush-promises'
 import SpiceDetailModal from '@/components/modals/SpiceDetailModal'
+import SpicesOrderPreviewList from '@/components/SpicesOrderPreviewList'
 
 describe('Spices.vue', () => {
   let localVue = createLocalVue()
@@ -105,5 +106,19 @@ describe('Spices.vue', () => {
 
     expect(wrapper.vm.$data.spiceDetails).toEqual(spice)
     expect(wrapper.find(SpiceDetailModal).exists()).toBeTruthy()
+  })
+
+  test('should add in preorder array item on click the add button', async () => {
+    const wrapper = mount(Spices, { store, localVue })
+
+    await flushPromises()
+
+    const spiceItems = wrapper.findAll(SpiceItem)
+    spiceItems.wrappers.forEach(wrapper => {
+      wrapper.find('button:last-of-type').trigger('click')
+    })
+
+    expect(wrapper.find(SpicesOrderPreviewList).exists()).toBeTruthy()
+    expect(wrapper.vm.$data.inPreOrder).toHaveLength(spiceItems.length)
   })
 })
