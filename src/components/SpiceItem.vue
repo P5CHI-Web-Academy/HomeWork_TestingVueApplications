@@ -4,7 +4,13 @@
 
 <script>
 export default {
-  name: 'SpiceItem'
+  name: 'SpiceItem',
+  props: {
+    spice: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 
