@@ -39,7 +39,7 @@ describe('Spices.vue', () => {
     })
   })
   test('render the header of the app', () => {
-    const wrapper = shallowMount(Spices)
+    const wrapper = shallowMount(Spices, { store, localVue })
 
     expect(wrapper.text()).toContain('Today in trend')
   })
