@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import Spices from '@/views/Spices'
+import SpiceItem from '@/components/SpiceItem'
 
 describe('Spices.vue', () => {
   test('render the header of the app', () => {
@@ -16,5 +17,20 @@ describe('Spices.vue', () => {
     })
 
     expect(wrapper.text()).toContain(spices.length)
+  })
+
+  test('render the list of items', () => {
+    const spices = [{}, {}, {}, {}]
+    const amount = spices.length
+
+    const wrapper = shallowMount(Spices)
+    wrapper.setData({
+      spices
+    })
+
+    const spiceItems = wrapper.findAll(SpiceItem)
+
+    expect(wrapper.vm.spicesCount).toBe(amount)
+    expect(spiceItems.length).toHaveLength(amount)
   })
 })
