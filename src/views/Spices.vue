@@ -19,6 +19,11 @@
           />
         </template>
       </b-col>
+      <b-col sm="4">
+        <spices-order-preview-list
+          :inPreOrder="inPreOrder"
+          v-show="inPreOrder.length > 0"/>
+      </b-col>
     </b-row>
     <spice-detail-modal :spice="spiceDetails" @add-spice="addSpice($event)"/>
   </div>
@@ -27,12 +32,14 @@
 <script>
 import SpiceItem from '@/components/SpiceItem'
 import SpiceDetailModal from '@/components/modals/SpiceDetailModal'
+import SpicesOrderPreviewList from '@/components/SpicesOrderPreviewList'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Spices',
   components: {
     SpiceItem,
-    SpiceDetailModal
+    SpiceDetailModal,
+    SpicesOrderPreviewList
   },
   data () {
     return {
