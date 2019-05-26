@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import SpiceItem from '@/components/SpiceItem'
 
 describe('SpiceItem.vue', () => {
@@ -35,5 +35,20 @@ describe('SpiceItem.vue', () => {
 
     expect(wrapper.text()).toContain(spice.title)
     expect(wrapper.text()).toContain(order)
+  })
+
+  test('should emit on-add-item on clicking the add button', () => {
+    const wrapper = mount(SpiceItem, {
+      propsData: {
+        spice: {
+          title: 'some title'
+        },
+        order: 10,
+        index: 2
+      }
+    })
+    wrapper.find('button:last-of-type').trigger('click')
+
+    expect(wrapper.emitted('add-spice')).toHaveLength(1)
   })
 })
