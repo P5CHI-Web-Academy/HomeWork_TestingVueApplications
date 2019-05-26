@@ -1,5 +1,7 @@
 <template>
-  <div>Hello</div>
+  <h1 class="text-left">
+    <span class="text-uppercase">Today in trend</span>
+  </h1>
 </template>
 
 <script>
