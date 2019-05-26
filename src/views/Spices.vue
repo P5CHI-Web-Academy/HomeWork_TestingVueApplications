@@ -9,8 +9,7 @@
     <b-row>
       <b-col sm="8">
         <template v-for="spice in spices">
-          <SpiceItem :key="spice.id" />
-          />
+          <SpiceItem :key="spice.id" :spice="spice" />
         </template>
       </b-col>
     </b-row>

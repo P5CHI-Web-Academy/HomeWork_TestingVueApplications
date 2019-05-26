@@ -33,4 +33,16 @@ describe('Spices.vue', () => {
     expect(wrapper.vm.spicesCount).toBe(amount)
     expect(spiceItems).toHaveLength(amount)
   })
+
+  test('send a valid props for each of rendered items', () => {
+    const spices = [{}, {}, {}, {}]
+    expect.assertions(spices.length)
+
+    const wrapper = shallowMount(Spices)
+
+    const spiceItems = wrapper.findAll(SpiceItem)
+    spiceItems.wrappers.forEach((wrapper, index) => {
+      expect(wrapper.props().spice).toEqual(spices[index])
+    })
+  })
 })
