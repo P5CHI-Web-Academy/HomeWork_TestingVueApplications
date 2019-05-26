@@ -11,6 +11,7 @@
           class="mr-3"
           variant="info"
           size="small"
+          @click="$emit('show-full-info', spice)"
         >details
         </b-btn>
         <b-btn

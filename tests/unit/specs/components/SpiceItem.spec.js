@@ -57,7 +57,9 @@ describe('SpiceItem.vue', () => {
       propsData: {
         spice: {
           title: 'some title'
-        }
+        },
+        order: 10,
+        index: 4
       }
     })
     wrapper.find('button:first-of-type').trigger('click')
