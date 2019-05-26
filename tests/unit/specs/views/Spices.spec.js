@@ -45,4 +45,12 @@ describe('Spices.vue', () => {
       expect(wrapper.props().spice).toEqual(spices[index])
     })
   })
+
+  test('emit/receive event from child component on change of the available spices', () => {
+    const wrapper = shallowMount(Spices)
+    const title = 'some spice title'
+
+    wrapper.find(SpiceItem).vm.$emit('add-spice', title)
+    expect(wrapper.vm.$data.inPreOrder).toContain(title)
+  })
 })
