@@ -1,26 +1,29 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Spices from '@/views/Spices'
 import SpiceItem from '@/components/SpiceItem'
+import Vuex from 'vuex'
+import flushPromises from 'flush-promises'
 
 describe('Spices.vue', () => {
-  let spices
+  let localVue = createLocalVue()
+  localVue.use(Vuex)
+
+  let store
+  let getters
+  let actions
   beforeEach(() => {
-    spices = [{
-      title: 'some title',
-      orderId: Number((Math.random() * 1000).toFixed()),
-      shortDescription: 'very short description'
-    }, {
-      title: 'some title',
-      orderId: Number((Math.random() * 1000).toFixed()),
-      shortDescription: 'very short description'
-    }, {
-      title: 'some title',
-      orderId: Number((Math.random() * 1000).toFixed()),
-      shortDescription: 'very short description'
-    }, {
-      title: 'some title',
-      orderId: Number((Math.random() * 1000).toFixed()),
-      shortDescription: 'very short description' }]
+    getters = {
+      getAvailableSpices: () => [{}, {}, {}]
+    }
+
+    actions = {
+      fetchSpices: jest.fn(() => Promise.resolve([]))
+    }
+
+    store = new Vuex.Store({
+      getters,
+      actions
+    })
   })
   test('render the header of the app', () => {
     const wrapper = shallowMount(Spices)
@@ -28,12 +31,11 @@ describe('Spices.vue', () => {
     expect(wrapper.text()).toContain('Today in trend')
   })
 
-  test('render the number of available spices', () => {
-    const wrapper = shallowMount(Spices)
-    wrapper.setData({
-      spices
-    })
+  test('render the number of available spices', async () => {
+    const spices = [{}, {}, {}]
+    const wrapper = shallowMount(Spices, { store, localVue })
 
+    await flushPromises()
     expect(wrapper.text()).toContain(spices.length)
   })
 
