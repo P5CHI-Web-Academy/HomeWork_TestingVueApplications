@@ -15,25 +15,30 @@
             :order="spice.orderId"
             :spice="spice"
             @add-spice="addSpice($event)"
+            @show-full-info="showDetails($event)"
           />
         </template>
       </b-col>
     </b-row>
+    <spice-detail-modal :spice="spiceDetails" @add-spice="addSpice($event)"/>
   </div>
 </template>
 
 <script>
 import SpiceItem from '@/components/SpiceItem'
+import SpiceDetailModal from '@/components/modals/SpiceDetailModal'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Spices',
   components: {
-    SpiceItem
+    SpiceItem,
+    SpiceDetailModal
   },
   data () {
     return {
       spices: [],
-      inPreOrder: []
+      inPreOrder: [],
+      spiceDetails: null
     }
   },
   async created () {
@@ -51,6 +56,10 @@ export default {
   methods: {
     addSpice ($event) {
       this.inPreOrder.push($event)
+    },
+    showDetails ($event) {
+      this.spiceDetails = $event
+      this.$root.$emit('bv::show::modal', 'spices_details_modal')
     }
   }
 }
