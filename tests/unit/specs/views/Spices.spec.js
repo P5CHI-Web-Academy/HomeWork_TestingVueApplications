@@ -3,6 +3,25 @@ import Spices from '@/views/Spices'
 import SpiceItem from '@/components/SpiceItem'
 
 describe('Spices.vue', () => {
+  let spices
+  beforeEach(() => {
+    spices = [{
+      title: 'some title',
+      orderId: Number((Math.random() * 1000).toFixed()),
+      shortDescription: 'very short description'
+    }, {
+      title: 'some title',
+      orderId: Number((Math.random() * 1000).toFixed()),
+      shortDescription: 'very short description'
+    }, {
+      title: 'some title',
+      orderId: Number((Math.random() * 1000).toFixed()),
+      shortDescription: 'very short description'
+    }, {
+      title: 'some title',
+      orderId: Number((Math.random() * 1000).toFixed()),
+      shortDescription: 'very short description' }]
+  })
   test('render the header of the app', () => {
     const wrapper = shallowMount(Spices)
 
@@ -10,7 +29,6 @@ describe('Spices.vue', () => {
   })
 
   test('render the number of available spices', () => {
-    const spices = [{}, {}, {}]
     const wrapper = shallowMount(Spices)
     wrapper.setData({
       spices
@@ -20,7 +38,6 @@ describe('Spices.vue', () => {
   })
 
   test('render the list of items', () => {
-    const spices = [{}, {}, {}, {}]
     const amount = spices.length
 
     const wrapper = shallowMount(Spices)
@@ -35,10 +52,12 @@ describe('Spices.vue', () => {
   })
 
   test('send a valid props for each of rendered items', () => {
-    const spices = [{}, {}, {}, {}]
     expect.assertions(spices.length)
 
     const wrapper = shallowMount(Spices)
+    wrapper.setData({
+      spices
+    })
 
     const spiceItems = wrapper.findAll(SpiceItem)
     spiceItems.wrappers.forEach((wrapper, index) => {
@@ -46,7 +65,7 @@ describe('Spices.vue', () => {
     })
   })
 
-  test('emit/receive event from child component on change of the available spices', () => {
+  test('receive event from child component on change of the available spices', () => {
     const wrapper = shallowMount(Spices)
     const title = 'some spice title'
 
