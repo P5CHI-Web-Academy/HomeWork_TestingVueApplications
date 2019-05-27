@@ -1,5 +1,7 @@
 # vue-academy-step-by-step
 
+## All home work described in the branch  `step_3.2_test_modal_window` do checkout to this branch and good luck))
+
 ## Project setup
 ```
 yarn install
