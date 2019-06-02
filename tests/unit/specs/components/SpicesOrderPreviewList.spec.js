@@ -1,12 +1,54 @@
-import { shallowMount } from '@vue/test-utils'
+import {mount} from '@vue/test-utils'
 import SpicesOrderPreviewList from '@/components/SpicesOrderPreviewList'
 
-// TODO homework
-describe.skip('SpicesOrderPreviewList', () => {
-  test.todo('check if it is renders correct amount of list items')
-  test.todo('move data fetching from store, using getters')
-  test.todo('create test and functionality for remove spice from list of preordered spices')
+describe('SpicesOrderPreviewList', () => {
+  const inPreOrder = [
+    {
+      title: 'title1',
+      img: 'img1',
+      description: 'description1',
+      shortDescription: 'shortDescription1'
+    },
+    {
+      title: 'title2',
+      img: 'img2',
+      description: 'description2',
+      shortDescription: 'shortDescription2'
+    }
+  ]
 
-  test.todo('check click `Add to Order` is triggered')
-  test.todo('check store for items in order')
+
+  test('correct amount of list items rendered', () => {
+    const wrapper = mount(SpicesOrderPreviewList, {
+      propsData: {
+        inPreOrder: inPreOrder
+      }
+    })
+
+    expect(wrapper.findAll('.list-group-item')).toHaveLength(inPreOrder.length)
+  })
+
+
+  test('remove spice from list of preordered spices', () => {
+    const wrapper = mount(SpicesOrderPreviewList, {
+      propsData: {
+        inPreOrder: inPreOrder
+      }
+    })
+
+    wrapper.find('.btn-danger').trigger('click')
+    expect(wrapper.emitted('remove-spice')).toHaveLength(1)
+  })
+
+
+  test('check click `Add to Order` is triggered', () => {
+    const wrapper = mount(SpicesOrderPreviewList, {
+      propsData: {
+        inPreOrder: inPreOrder
+      }
+    })
+
+    wrapper.find('.btn-primary').trigger('click')
+    expect(wrapper.emitted('add-to-order')).toHaveLength(1)
+  })
 })
