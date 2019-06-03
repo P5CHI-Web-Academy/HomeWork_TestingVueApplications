@@ -18,13 +18,13 @@ describe('Spices.vue', () => {
       getAvailableSpices: () => [
         {
           title: 'some test title',
-          orderId: 1
+          spiceId: 1
         }, {
           title: 'some test title',
-          orderId: 2
+          spiceId: 2
         }, {
           title: 'some test title',
-          orderId: 3
+          spiceId: 3
         }
       ]
     }

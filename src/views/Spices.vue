@@ -2,25 +2,27 @@
   <div>
     <div class="header-wrapper d-flex justify-content-between">
       <h1 class="text-left">
-        <span class="text-uppercase">Today in trend</span>
+        <span class="text-uppercase">
+          Today in trend
+        </span>
       </h1>
 
       <div>
-      <p>
-      <span class='small'>
-        Available spices - {{ spicesCount }}
-      </span>
-      </p>
+        <p>
+          <span class="small">
+            Available spices - {{ spicesCount }}
+          </span>
+        </p>
 
-      <p>
-        <span class="small text-warning">
-          A discount is applied if at least one condition satisfied
-          <ul>
-            <li>more than 3 types of items are in order</li>
-            <li>at least one item has quantity more than 3 in order</li>
-          </ul>
-      </span>
-      </p>
+        <p>
+          <span class="small text-warning">
+            A discount is applied if at least one condition satisfied
+            <ul>
+              <li>more than 3 types of items are in order</li>
+              <li>at least one item has quantity more than 3 in order</li>
+            </ul>
+          </span>
+        </p>
       </div>
     </div>
 
@@ -39,14 +41,14 @@
       </b-col>
       <b-col sm="4">
         <SpicesOrderPreviewList
-          :inPreOrder="inPreOrder"
           v-show="inPreOrder.length > 0"
+          :in-pre-order="inPreOrder"
           @remove-spice="removeSpice($event)"
           @add-to-order="addToOrder()"
         />
       </b-col>
     </b-row>
-    <spice-detail-modal :spice="spiceDetails" @add-spice="addSpice($event)"/>
+    <spice-detail-modal :spice="spiceDetails" @add-spice="addSpice($event)" />
   </div>
 </template>
 

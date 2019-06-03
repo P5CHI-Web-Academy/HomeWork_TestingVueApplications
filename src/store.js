@@ -55,7 +55,7 @@ export default new Vuex.Store({
 
         return a
       }, state.orderSpices)
-      Vue.set(state, 'orderSpices', {...OrderSpices})
+      Vue.set(state, 'orderSpices', { ...OrderSpices })
     },
     CLEAR_ORDER (state) {
       state.orderSpices = {}
@@ -65,7 +65,7 @@ export default new Vuex.Store({
       orderPosition.quantity += data.val
 
       if (orderPosition.quantity > 0) {
-        Vue.set(state.orderSpices, data.spiceId, {...orderPosition})
+        Vue.set(state.orderSpices, data.spiceId, { ...orderPosition })
       } else {
         Vue.delete(state.orderSpices, data.spiceId)
       }

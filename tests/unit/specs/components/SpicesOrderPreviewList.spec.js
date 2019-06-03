@@ -1,4 +1,4 @@
-import {mount} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import SpicesOrderPreviewList from '@/components/SpicesOrderPreviewList'
 
 describe('SpicesOrderPreviewList', () => {
@@ -17,7 +17,6 @@ describe('SpicesOrderPreviewList', () => {
     }
   ]
 
-
   test('correct amount of list items rendered', () => {
     const wrapper = mount(SpicesOrderPreviewList, {
       propsData: {
@@ -28,8 +27,7 @@ describe('SpicesOrderPreviewList', () => {
     expect(wrapper.findAll('.list-group-item')).toHaveLength(inPreOrder.length)
   })
 
-
-  test('remove spice from list of preordered spices', () => {
+  test('spice can be removed from list of preordered spices', () => {
     const wrapper = mount(SpicesOrderPreviewList, {
       propsData: {
         inPreOrder: inPreOrder
@@ -40,8 +38,7 @@ describe('SpicesOrderPreviewList', () => {
     expect(wrapper.emitted('remove-spice')).toHaveLength(1)
   })
 
-
-  test('check click `Add to Order` is triggered', () => {
+  test('click `Add to Order` triggers corresponding event', () => {
     const wrapper = mount(SpicesOrderPreviewList, {
       propsData: {
         inPreOrder: inPreOrder
