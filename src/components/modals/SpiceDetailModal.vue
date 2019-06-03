@@ -15,6 +15,10 @@
               <li v-for="(tag, tagName) in spice.tags" :key="tag.id">
                 <span><strong>{{ transformTagName(tagName) }}</strong></span> - {{splitTags(tag)}}
               </li>
+
+              <li>
+                <span><strong>Price: </strong></span>{{spice.price}} &euro;
+              </li>
             </ul>
           </b-col>
           <b-col>
@@ -44,7 +48,10 @@ export default {
   name: 'Modal',
   props: {
     spice: {
-      type: Object
+      type: Object,
+      default: function () {
+        return {}
+      }
     }
   },
   methods: {

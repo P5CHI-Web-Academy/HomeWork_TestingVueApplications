@@ -2,7 +2,11 @@
   <div>
     <b-row>
       <b-col>
-        <b-btn block variant="primary">Add to order</b-btn>
+        <b-btn
+          block
+          variant="primary"
+          @click="$emit('add-to-order')"
+        >Add to order ({{total}} &euro;)</b-btn>
       </b-col>
     </b-row>
     <b-row>
@@ -10,7 +14,14 @@
         <b-col sm="12" :key="item.id">
           <b-list-group class="mt-2">
             <b-list-group-item class="d-flex justify-content-between align-items-center">
-              {{ item.title }} <img :src="item.img" style="max-height: 40px" :alt="item.description" :title="item.shortDescription"/>
+              <b>{{item.price}} &euro;</b> {{ item.title }} <img :src="item.img" style="max-height: 40px" :alt="item.description" :title="item.shortDescription"/>
+
+              <b-btn
+                variant="danger"
+                size="small"
+                @click="$emit('remove-spice', item)"
+              >remove
+              </b-btn>
             </b-list-group-item>
           </b-list-group>
         </b-col>
@@ -23,14 +34,19 @@
 <script>
 export default {
   name: 'SpicesOrderPreviewList',
-  data () {
-    return {
-      items: null
-    }
-  },
   props: {
     inPreOrder: {
+      required: true,
       type: Array
+    }
+  },
+  computed: {
+    total () {
+      return Math.round(
+        this.inPreOrder.reduce((a, b) => {
+          return a + b.price
+        }, 0) * 100
+      ) / 100
     }
   }
 }
