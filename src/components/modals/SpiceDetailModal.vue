@@ -17,7 +17,7 @@
               </li>
 
               <li>
-                <span><strong>Price: </strong></span>{{ spice.price }} &euro;
+                <span><strong>Price: </strong></span>{{ spice.price|currency }}
               </li>
             </ul>
           </b-col>

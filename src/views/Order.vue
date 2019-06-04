@@ -36,7 +36,7 @@
             <img :src="item.img" style="max-height: 40px" :alt="item.description" :title="item.shortDescription">
           </div>
           <div>
-            <b>{{ item.price }} &euro;</b>
+            <b>{{ item.price|currency }}</b>
           </div>
         </b-list-group-item>
       </b-list-group>

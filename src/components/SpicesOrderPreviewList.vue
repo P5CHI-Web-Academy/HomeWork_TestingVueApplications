@@ -7,7 +7,7 @@
           variant="primary"
           @click="$emit('add-to-order')"
         >
-          Add to order ({{ total }} &euro;)
+          Add to order ({{ total|currency }})
         </b-btn>
       </b-col>
     </b-row>
@@ -16,7 +16,7 @@
         <b-col :key="item.id" sm="12">
           <b-list-group class="mt-2">
             <b-list-group-item class="d-flex justify-content-between align-items-center">
-              <b>{{ item.price }} &euro;</b> {{ item.title }} <img :src="item.img" style="max-height: 40px" :alt="item.description" :title="item.shortDescription">
+              <b>{{ item.price|currency }}</b> {{ item.title }} <img :src="item.img" style="max-height: 40px" :alt="item.description" :title="item.shortDescription">
 
               <b-btn
                 variant="danger"

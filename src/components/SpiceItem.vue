@@ -9,7 +9,7 @@
       </span>
       <div>
         <p class="ml-3 mr-5 mb-0">
-          <b>{{ spice.price }} &euro;</b>
+          <b>{{ spice.price|currency }}</b>
         </p>
         <p class="ml-3 mr-5 mb-0">
           <span class="text-uppercase">

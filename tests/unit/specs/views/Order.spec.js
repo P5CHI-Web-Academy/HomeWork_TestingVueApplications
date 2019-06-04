@@ -1,6 +1,7 @@
 import { createLocalVue, mount } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Order from '../../../../src/views/Order'
+import Order from '@/views/Order'
+import flushPromises from 'flush-promises'
 
 describe('Order', () => {
   const inOrder = {
@@ -55,9 +56,11 @@ describe('Order', () => {
     const wrapper = mount(Order, { store, localVue })
 
     wrapper.find('.btn-warning').trigger('click')
+    await flushPromises()
     expect(actions.updateQuantity).toHaveBeenCalled()
 
     wrapper.find('.btn-success').trigger('click')
+    await flushPromises()
     expect(actions.updateQuantity).toHaveBeenCalled()
   })
 
@@ -65,11 +68,13 @@ describe('Order', () => {
     const wrapper = mount(Order, { store, localVue })
 
     wrapper.find('.btn-danger').trigger('click')
+    await flushPromises()
     expect(actions.clearOrder).toHaveBeenCalled()
   })
 
   test('`discount` message is rendered, when there is discount', async () => {
     const wrapper = mount(Order, { store, localVue })
+    await flushPromises()
     expect(wrapper.text()).toContain('DISCOUNT')
   })
 
@@ -82,6 +87,7 @@ describe('Order', () => {
       getters: getters
     })
     const wrapper = mount(Order, { store, localVue })
+    await flushPromises()
     expect(wrapper.text()).not.toContain('DISCOUNT')
   })
 })

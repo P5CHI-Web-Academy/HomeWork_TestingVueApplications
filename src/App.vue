@@ -7,7 +7,7 @@
           |
         </span>
         <router-link :to="{name: 'order'}">
-          Order({{ orderAmount }} &euro;)
+          Order({{ orderAmount|currency }})
         </router-link>
         <span v-if="isOrderDiscount" class="text-danger small">
           <b>DISCOUNT</b>
