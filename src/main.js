@@ -4,14 +4,10 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import '@/assets/sass/index.scss'
 import store from './store'
+import '@/filters/currency'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
-
-Vue.filter('currency', function (value) {
-  value = value.toString()
-  return value + ' \u20AC' // euro sign
-})
 
 new Vue({
   router,
