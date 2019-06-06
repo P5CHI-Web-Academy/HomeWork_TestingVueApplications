@@ -1,29 +1,58 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <b-container>
+      <div id="nav" class="my-4">
+        <router-link :to="{name: 'home'}">Home</router-link>
+        <span class="mx-2">
+          |
+        </span>
+        <router-link :to="{name: 'order'}">
+          Order({{ orderAmount|currency }})
+        </router-link>
+        <span v-if="isOrderDiscount" class="text-danger small">
+          <b>DISCOUNT</b>
+        </span>
+      </div>
+      <router-view />
+    </b-container>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'App',
+  computed: {
+    ...mapGetters([
+      'getOrderAmount',
+      'isOrderDiscount'
+    ]),
+    orderAmount () {
+      return Math.round(
+        this.getOrderAmount * (this.isOrderDiscount ? 0.8 : 1) * 100
+      ) / 100
     }
   }
 }
+</script>
+
+<style lang="scss">
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+  }
+
+  #nav {
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
 </style>

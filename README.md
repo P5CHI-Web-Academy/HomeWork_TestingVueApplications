@@ -1,6 +1,10 @@
 # vue-academy-step-by-step
 
-## All home work described in the branch  `step_3.2_test_modal_window` do checkout to this branch and good luck))
+### All home work located in
+[SpicesOrderPreviewList.spec.js](tests/unit/specs/components/SpicesOrderPreviewList.spec.js)
+[Order.spec.js](tests/unit/specs/views/Order.spec.js)
+also you can add tests for [SpiceDetailModal.vue](src/components/modals/SpiceDetailModal.vue)
+
 
 ## Project setup
 ```
@@ -26,6 +30,3 @@ yarn run test
 ```
 yarn run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
