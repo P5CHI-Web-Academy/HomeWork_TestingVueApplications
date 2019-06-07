@@ -8,10 +8,12 @@ export default new Vuex.Store({
   strict: true, // INFO should be disabled in production
   state: {
     spices: [],
-    spice: ''
+    spice: '',
+    inPreOrder: []
   },
   getters: {
-    getAvailableSpices: state => state.spices.filter(spice => spice.isAvailable === true)
+    getAvailableSpices: state => state.spices.filter(spice => spice.isAvailable === true),
+    getPreOrderList: state => state.inPreOrder
   },
   actions: {
     async fetchSpices ({ state, commit }) {
